@@ -113,24 +113,24 @@ public class TodoController {
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "/todos/generate/python", method = RequestMethod.POST)
-//    public ResponseEntity<?> todosGeneratePython() {
-//        logger.info("Requesting task from python lambda");
-//
-//        final String url = "http://python.task-generator.rookout-demo.com/";
-//        HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
-//                .header("accept", "application/json")
-//                .asJson();
-//
-//        String task = jsonResponse.getBody().getObject().get("task").toString();
-//
-//        TodoRecord newTodoRecord = new TodoRecord(task,
-//                UUID.randomUUID().toString(),
-//                false);
-//        todos.add(newTodoRecord);
-//
-//        Map<String, String> entities = new HashMap<>();
-//        entities.put("status", "ok");
-//        return new ResponseEntity<>(entities, HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/todos/generate/python", method = RequestMethod.POST)
+    public ResponseEntity<?> todosGeneratePython() {
+        logger.info("Requesting task from python lambda");
+
+        final String url = "http://python.task-generator.rookout-demo.com/";
+        HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
+                .header("accept", "application/json")
+                .asJson();
+
+        String task = jsonResponse.getBody().getObject().get("task").toString();
+
+        TodoRecord newTodoRecord = new TodoRecord(task,
+                UUID.randomUUID().toString(),
+                false);
+        todos.add(newTodoRecord);
+
+        Map<String, String> entities = new HashMap<>();
+        entities.put("status", "ok");
+        return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
 }

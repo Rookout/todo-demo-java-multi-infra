@@ -24,7 +24,7 @@
                         v-on:update-todo="updateTodo" />
                 </ul>
             </section>
-            <footer class="footer">
+            <footer class="footer no-shadow">
                 <span class="todo-count">{{filteredTodos.length}} Tasks</span>
                 <ul class="filters">
                     <li>
@@ -36,11 +36,20 @@
                     <li>
                         <a style="cursor: pointer" v-on:click="setFilter('completed')" v-bind:class="{selected: filterMode === 'completed'}">Completed</a>
                     </li>
-                    <li>
-                        <a style="cursor: pointer" v-on:click="generateTodoNode">Generate task</a>
-                    </li>
                 </ul>
                 <button v-on:click="clearCompleted" class="clear-completed">Clear completed</button>
+            </footer>
+            <footer class="footer footer-generators">
+                <ul class="generators">
+                    <li>
+                        <div v-if="nodeLoading" class="loader"></div>
+                        <a v-else style="cursor: pointer" v-on:click="generateTodoNode">Generate task (node)</a>
+                    </li>
+                    <li>
+                        <div v-if="pythonLoading" class="loader"></div>
+                        <a v-else style="cursor: pointer" v-on:click="generateTodoPython">Generate task (python)</a>
+                    </li>
+                </ul>
             </footer>
         </section>
         <footer class="info">
