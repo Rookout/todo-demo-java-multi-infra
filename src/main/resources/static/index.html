@@ -36,11 +36,18 @@
                     <li>
                         <a style="cursor: pointer" v-on:click="setFilter('completed')" v-bind:class="{selected: filterMode === 'completed'}">Completed</a>
                     </li>
-                    <li>
-                        <a style="cursor: pointer" v-on:click="generateTodoNode">Generate task</a>
-                    </li>
                 </ul>
                 <button v-on:click="clearCompleted" class="clear-completed">Clear completed</button>
+            </footer>
+            <footer class="footer">
+                <ul class="generators">
+                    <li>
+                        <a style="cursor: pointer" v-on:click="generateTodoNode">Generate task (node)</a>
+                    </li>
+                    <li>
+                        <a style="cursor: pointer" v-on:click="generateTodoPython">Generate task (python)</a>
+                    </li>
+                </ul>
             </footer>
         </section>
         <footer class="info">

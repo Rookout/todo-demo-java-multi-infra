@@ -305,7 +305,7 @@ label[for='toggle-all'] {
 	font-weight: 300;
 }
 
-.filters {
+.filters, .generators {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -314,11 +314,11 @@ label[for='toggle-all'] {
 	left: 0;
 }
 
-.filters li {
+.filters li, .generators li {
 	display: inline;
 }
 
-.filters li a {
+.filters li a, .generators li {
 	color: inherit;
 	margin: 3px;
 	padding: 3px 7px;
@@ -334,6 +334,12 @@ label[for='toggle-all'] {
 
 .filters li a.selected {
 	border-color: rgba(153, 98, 255, 0.5);
+}
+
+.generators li a.selected,
+.generators li a:hover {
+	text-decoration: underline;
+	text-decoration-color: #9962FF;
 }
 
 .clear-completed,
