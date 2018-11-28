@@ -34,7 +34,9 @@ $().ready(() => {
             todos: [],
             newTodoTitle: '',
             filterMode: 'all',
-            todosFilter: (todo) => true
+            todosFilter: (todo) => true,
+            nodeLoading: false,
+            pythonLoading: false
         },
         computed: {
             filteredTodos() {
@@ -85,6 +87,8 @@ $().ready(() => {
             },
             reloadOnFinish(promise) {
                 promise.done((data) => {
+                    this.nodeLoading = false;
+                    this.pythonLoading = false;
                     data ? console.log(`got status: ${data.status}`) : null;
                     return this.reloadTodos();
                 }).catch(console.log);
@@ -114,12 +118,14 @@ $().ready(() => {
                 this.newTodoTitle = '';
             },
             generateTodoNode() {
+                this.nodeLoading = true;
                 const action = $.ajax(`/todos/generate/node`, {
                     method: 'POST',
                 });
                 this.reloadOnFinish(action);
             },
             generateTodoPython() {
+                this.pythonLoading = true;
                 const action = $.ajax(`/todos/generate/python`, {
                     method: 'POST',
                 });

@@ -296,6 +296,14 @@ label[for='toggle-all'] {
 	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
 }
 
+.footer.no-shadow::before {
+	box-shadow: none !important;
+}
+
+.footer.footer-generators:before {
+	height: 40px !important;
+}
+
 .todo-count {
 	float: left;
 	text-align: left;
@@ -378,6 +386,27 @@ html .clear-completed:active {
 .info a:hover {
 	text-decoration: underline;
 }
+
+/* Loader */
+
+li div.loader {
+	display: inline-block;
+}
+
+.loader {
+	border: 2px solid #f3f3f3; /* Light grey */
+	border-top: 2px solid #9962FF; /* purple */
+	border-radius: 50%;
+	width: 16px;
+	height: 16px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
 
 /*
 	Hack to remove background from Mobile Safari.
