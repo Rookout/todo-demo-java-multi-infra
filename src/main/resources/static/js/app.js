@@ -19,12 +19,12 @@ $().ready(() => {
         },
         template: `<li v-bind:class="{ completed: todo.completed, editing: editing }">
                 <div class="view">
-                  <input class="toggle" type="checkbox" @change="onTodoToggle" v-model="todo.completed">
+                  <input class="toggle" type="checkbox" @change="onTodoToggle" v-model="todo.completed" data-selector="checkbox-todo-toggle">
                   <label class="todo-label" v-on:dblclick="editing=true">{{ todo.title }}</label>
-                  <button class="duplicate" v-on:click="$emit('duplicate-todo',todo)"></button>
-                  <button class="destroy" v-on:click="$emit('remove-todo',todo)"></button>
+                  <button class="duplicate" v-on:click="$emit('duplicate-todo',todo)" data-selector="button-todo-duplicate"></button>
+                  <button class="destroy" v-on:click="$emit('remove-todo',todo)" data-selector="button-todo-remove"></button>
                 </div>
-                <input class="edit" type="text" v-on:keypress="saveTodoEdit" v-model="todo.title">
+                <input class="edit" type="text" v-on:keypress="saveTodoEdit" v-model="todo.title" data-selector="input-todo-edit">
               </li>`
     });
 
@@ -57,6 +57,19 @@ $().ready(() => {
                         this.todosFilter = (todo) => todo.completed;
                         break;
                 }
+            },
+            toggleAll() {
+                this.todos.forEach(todo => {
+                    let toggledTodo = todo;
+                    toggledTodo.completed = !toggledTodo.completed;
+                    const action = $.ajax('/todos', {
+                        contentType: 'application/json',
+                        method: 'PUT',
+                        data: JSON.stringify(toggledTodo),
+                        dataType: 'json',
+                    });
+                });
+                this.reloadTodos();
             },
             clearCompleted(e) {
                 const action = $.ajax('/todos/clear_completed', {

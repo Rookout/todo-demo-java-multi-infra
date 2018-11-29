@@ -81,9 +81,8 @@ public class TodoController {
         TodoRecord tempTodoRecord = todos.findById(todoId);
         if (tempTodoRecord != null) {
             TodoRecord newTodoRecord = new TodoRecord(tempTodoRecord);
-            // The bug in here in is for the bughunt example
-            newTodoRecord.setId(tempTodoRecord.getTitle());
-            newTodoRecord.setTitle(UUID.randomUUID().toString());
+            newTodoRecord.setId(UUID.randomUUID().toString());
+            newTodoRecord.setTitle(tempTodoRecord.getTitle());
             logger.info("Duplicating todo record: {}", newTodoRecord);
             todos.add(newTodoRecord);
         }

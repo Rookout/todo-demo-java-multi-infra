@@ -14,10 +14,10 @@
         <section class="todoapp">
             <header class="header">
                 <h1>todos</h1>
-                <input class="new-todo" v-model="newTodoTitle" v-on:keypress="onAddTodoPressed" autofocus="" placeholder="What needs to be done?">
+                <input class="new-todo" v-model="newTodoTitle" v-on:keypress="onAddTodoPressed" autofocus="" placeholder="What needs to be done?" data-selector="input-new-todo">
             </header>
             <section class="main">
-                <input class="toggle-all" type="checkbox">
+                <input class="toggle-all" type="checkbox" data-selector="checkbox-toggle-all" v-on:click="toggleAll()">
                 <label for="toggle-all">Mark all as complete</label>
                 <ul class="todo-list">
                     <todo-item v-for="todo in filteredTodos" v-bind:todo="todo" v-on:remove-todo="removeTodo" v-on:duplicate-todo="duplicateTodo"
@@ -28,26 +28,26 @@
                 <span class="todo-count">{{filteredTodos.length}} Tasks</span>
                 <ul class="filters">
                     <li>
-                        <a style="cursor: pointer" v-on:click="setFilter('all')" v-bind:class="{selected: filterMode === 'all'}">All</a>
+                        <a style="cursor: pointer" v-on:click="setFilter('all')" v-bind:class="{selected: filterMode === 'all'}" data-selector="link-filter-all">All</a>
                     </li>
                     <li>
-                        <a style="cursor: pointer" v-on:click="setFilter('active')" v-bind:class="{selected: filterMode === 'active'}">Active</a>
+                        <a style="cursor: pointer" v-on:click="setFilter('active')" v-bind:class="{selected: filterMode === 'active'}" data-selector="link-filter-active">Active</a>
                     </li>
                     <li>
-                        <a style="cursor: pointer" v-on:click="setFilter('completed')" v-bind:class="{selected: filterMode === 'completed'}">Completed</a>
+                        <a style="cursor: pointer" v-on:click="setFilter('completed')" v-bind:class="{selected: filterMode === 'completed'}" data-selector="link-filter-completed">Completed</a>
                     </li>
                 </ul>
-                <button v-on:click="clearCompleted" class="clear-completed">Clear completed</button>
+                <button v-on:click="clearCompleted" class="clear-completed" data-selector="link-clear-completed">Clear completed</button>
             </footer>
             <footer class="footer footer-generators">
                 <ul class="generators">
                     <li>
                         <div v-if="nodeLoading" class="loader"></div>
-                        <a v-else style="cursor: pointer" v-on:click="generateTodoNode">Generate task (node)</a>
+                        <a v-else style="cursor: pointer" v-on:click="generateTodoNode" data-selector="link-generate-todo-node">Generate task (node)</a>
                     </li>
                     <li>
                         <div v-if="pythonLoading" class="loader"></div>
-                        <a v-else style="cursor: pointer" v-on:click="generateTodoPython">Generate task (python)</a>
+                        <a v-else style="cursor: pointer" v-on:click="generateTodoPython" data-selector="link-generate-todo-python">Generate task (python)</a>
                     </li>
                 </ul>
             </footer>
