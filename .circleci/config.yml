@@ -114,7 +114,7 @@ jobs:
     working_directory: ~/demo
     steps:
       - run: sleep 15 && echo "Checking Production..."
-      - run: curl --fail 'http://tasks.rookout-demo.com/todos?env=statuscake'
+      - run: curl --fail 'http://tasks.rookout-demo.com/todos?from=statuscake'
 
 
 workflows:
