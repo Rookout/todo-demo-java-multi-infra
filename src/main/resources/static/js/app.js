@@ -58,6 +58,19 @@ $().ready(() => {
                         break;
                 }
             },
+            toggleAll() {
+                this.todos.forEach(todo => {
+                    let toggledTodo = todo;
+                    toggledTodo.completed = !toggledTodo.completed;
+                    const action = $.ajax('/todos', {
+                        contentType: 'application/json',
+                        method: 'PUT',
+                        data: JSON.stringify(toggledTodo),
+                        dataType: 'json',
+                    });
+                });
+                this.reloadTodos();
+            },
             clearCompleted(e) {
                 const action = $.ajax('/todos/clear_completed', {
                     method: 'DELETE'
