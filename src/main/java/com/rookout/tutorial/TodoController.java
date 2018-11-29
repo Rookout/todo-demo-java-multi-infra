@@ -17,7 +17,14 @@ public class TodoController {
     private TodoStorage todos = TodoStorage.getInstance();
 
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
-    public TodoRecord[] getTodos() {
+    public TodoRecord[] getTodos(@RequestParam(value="env", required=false, defaultValue="") String env) {
+        if (env.equalsIgnoreCase("e2e-test")) {
+            logger.info("E2E Test just triggered this function");
+            return new TodoRecord[0];
+        } else if (env.equalsIgnoreCase("statuscake")) {
+            logger.info("StatusCake just triggered this function");
+            return new TodoRecord[0];
+        }
         return todos.getAll();
     }
 
