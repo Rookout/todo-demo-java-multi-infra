@@ -42,12 +42,12 @@
             <footer class="footer footer-generators">
                 <ul class="generators">
                     <li>
+                        <a style="cursor: pointer" v-on:click="generateTodoNode" data-selector="link-generate-todo-node">Generate task (node)</a>
                         <div v-if="nodeLoading" class="loader"></div>
-                        <a v-else style="cursor: pointer" v-on:click="generateTodoNode" data-selector="link-generate-todo-node">Generate task (node)</a>
                     </li>
                     <li>
+                        <a style="cursor: pointer" v-on:click="generateTodoPython" data-selector="link-generate-todo-python">Generate task (python)</a>
                         <div v-if="pythonLoading" class="loader"></div>
-                        <a v-else style="cursor: pointer" v-on:click="generateTodoPython" data-selector="link-generate-todo-python">Generate task (python)</a>
                     </li>
                 </ul>
             </footer>
