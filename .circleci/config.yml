@@ -106,6 +106,7 @@ jobs:
       - *load_version
       - run: git clone git@github.com:Rookout/deployment-demo
       - run: apt install make -y
+      - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=staging && make deploy-demo
       - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=production && make deploy-demo
 
   test_demo_servers_up:
@@ -113,8 +114,10 @@ jobs:
         - image: google/cloud-sdk:latest
     working_directory: ~/demo
     steps:
-      - run: sleep 15 && echo "Checking Production..."
+      - run: sleep 20 && echo "Checking Production..."
       - run: curl --fail 'http://tasks.rookout-demo.com/todos?from=statuscake'
+      - run: sleep 20 && echo "Checking Staging..."
+      - run: curl --fail 'http://staging.tasks.rookout-demo.com/todos?from=statuscake'
 
 
 workflows:
