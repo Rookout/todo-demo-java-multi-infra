@@ -102,7 +102,14 @@ public class TodoController {
     public ResponseEntity<?> todosGenerateNode() {
         logger.info("Requesting task from node lambda");
 
-        final String url = "http://node.task-generator.rookout-demo.com/";
+        final String env = GetEnv();
+        String url;
+        if (GetEnv().equals("production")) {
+            url = "http://node.task-generator.rookout-demo.com/";
+        } else {
+            url = "http://" + env + ".node.task-generator-rookout-demo.com/";
+        }
+
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
                 .header("accept", "application/json")
                 .asJson();
@@ -123,7 +130,14 @@ public class TodoController {
     public ResponseEntity<?> todosGeneratePython() {
         logger.info("Requesting task from python lambda");
 
-        final String url = "http://python.task-generator.rookout-demo.com/";
+        final String env = GetEnv();
+        String url;
+        if (GetEnv().equals("production")) {
+            url = "http://python.task-generator.rookout-demo.com/";
+        } else {
+            url = "http://" + env + ".python.task-generator-rookout-demo.com/";
+        }
+
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
                 .header("accept", "application/json")
                 .asJson();
@@ -138,5 +152,13 @@ public class TodoController {
         Map<String, String> entities = new HashMap<>();
         entities.put("status", "ok");
         return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
+
+    private static String GetEnv() {
+        String environment = System.getenv("ENV");
+        if (environment.isEmpty()) {
+            environment = "staging";
+        }
+        return environment;
     }
 }
