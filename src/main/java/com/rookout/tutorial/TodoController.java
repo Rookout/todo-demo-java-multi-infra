@@ -161,4 +161,9 @@ public class TodoController {
         }
         return environment;
     }
+
+    @RequestMapping(value = "/healthz", method = RequestMethod.GET)
+    public ResponseEntity<?> healthRoute() {
+        return new ResponseEntity<>(new HashMap<>(), HttpStatus.OK);
+    }
 }
