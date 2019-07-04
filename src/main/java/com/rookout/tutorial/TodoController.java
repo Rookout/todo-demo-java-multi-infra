@@ -107,7 +107,7 @@ public class TodoController {
         if (GetEnv().equals("production")) {
             url = "http://node.task-generator.rookout-demo.com/";
         } else {
-            url = "http://" + env + ".node.task-generator-rookout-demo.com/";
+            url = "http://" + env + ".node.task-generator.rookout-demo.com/";
         }
 
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
@@ -135,7 +135,7 @@ public class TodoController {
         if (GetEnv().equals("production")) {
             url = "http://python.task-generator.rookout-demo.com/";
         } else {
-            url = "http://" + env + ".python.task-generator-rookout-demo.com/";
+            url = "http://" + env + ".python.task-generator.rookout-demo.com/";
         }
 
         HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
