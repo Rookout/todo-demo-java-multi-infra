@@ -29,3 +29,4 @@ rook.jar
 .idea
 .settings
 .gradle
+!gradle-wrapper.jar
