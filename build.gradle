@@ -7,6 +7,12 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+
+        // Specific dependencies for fixing different vulnerabilities 
+        classpath("org.hibernate.validator:hibernate-validator:6.1.1.Final")
+        classpath("org.springframework:spring-webmvc:5.2.3.RELEASE")
+        classpath("org.apache.tomcat.embed:tomcat-embed-core:9.0.30")
+
     }
 }
 
@@ -49,7 +55,7 @@ class Download extends DefaultTask {
 }
 
 task downloadRookout(type: Download) {
-    sourceUrl = "https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.rookout&a=rook&v=0.1.99"
+    sourceUrl = "https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.rookout&a=rook&v=0.1.102"
     target = new File('rook.jar')
 }
 
