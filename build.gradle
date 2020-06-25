@@ -35,7 +35,7 @@ repositories {
 
 
 dependencies {
-    compile('io.joshworks.unirest:unirest-java:1.6.0')
+    compile('io.joshworks.unirest:unirest-java:1.13.0')
     compile('org.springframework.boot:spring-boot-starter-web')
 
     // Specific dependencies for fixing different vulnerabilities
