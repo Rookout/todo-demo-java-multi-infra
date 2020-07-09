@@ -47,6 +47,9 @@ dependencies {
 
     implementation 'com.bugsnag:bugsnag-spring:3.+'
     compile("io.sentry:sentry:1.7.30")
+    compile("io.logz.logback:logzio-logback-appender:1.0.24")
+    compile group: 'org.codehaus.janino', name: 'janino', version: '3.0.16'
+
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
