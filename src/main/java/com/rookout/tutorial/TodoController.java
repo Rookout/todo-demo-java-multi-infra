@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.bugsnag.Bugsnag;
+import io.sentry.Sentry;
 
 import java.util.*;
 
@@ -79,11 +80,14 @@ public class TodoController {
                 }
             }
         }
+        // Exception Management //
         BugsnagConfig bc = new BugsnagConfig();
         Bugsnag bugsnag = bc.bugsnag();
         if (bugsnag != null) {
             bugsnag.notify(new RuntimeException("Test error"));
         }
+        Sentry.capture(new RuntimeException("Test error"));
+        // Exception Management //
         Map<String, String> entities = new HashMap<>();
         entities.put("status", "ok");
         return new ResponseEntity<>(entities, HttpStatus.OK);

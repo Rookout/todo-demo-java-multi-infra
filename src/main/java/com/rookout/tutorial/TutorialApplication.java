@@ -2,6 +2,7 @@ package com.rookout.tutorial;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import io.sentry.Sentry;
 
 /*
  * @SpringBootApplication is a convenience annotation that adds all of the following:
@@ -22,6 +23,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TutorialApplication {
 
     public static void main(String[] args) {
+        Sentry.init();
         SpringApplication.run(TutorialApplication.class, args);
     }
 }
