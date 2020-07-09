@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.bugsnag.Bugsnag;
+
 import java.util.*;
 
 @RestController
@@ -76,6 +78,11 @@ public class TodoController {
                     logger.info("Removing Todo record: {}", todoRecord);
                 }
             }
+        }
+        BugsnagConfig bc = new BugsnagConfig();
+        Bugsnag bugsnag = bc.bugsnag();
+        if (bugsnag != null) {
+            bugsnag.notify(new RuntimeException("Test error"));
         }
         Map<String, String> entities = new HashMap<>();
         entities.put("status", "ok");
