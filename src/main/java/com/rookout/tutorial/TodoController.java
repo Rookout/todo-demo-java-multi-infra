@@ -14,7 +14,10 @@ import java.util.*;
 @RestController
 public class TodoController {
     private static final Logger logger = LoggerFactory.getLogger(TodoController.class);
+    private final Random random = new Random();
     private TodoStorage todos = TodoStorage.getInstance();
+    private int todosCounter = 0;
+
 
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
     public TodoRecord[] getTodos(@RequestParam(value="from", required=false, defaultValue="") String from) {
@@ -36,6 +39,7 @@ public class TodoController {
         String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s.,!<>]+", "");
         newTodoRecord.setTitle(todoTitle);
         todos.add(newTodoRecord);
+        todosCounter += random.nextInt(10);
         Map<String, String> entities = new HashMap<>();
         entities.put("status", "ok");
         return new ResponseEntity<>(entities, HttpStatus.OK);
