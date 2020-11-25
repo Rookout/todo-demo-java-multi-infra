@@ -39,7 +39,7 @@ public class TodoController {
         String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s.,!<>]+", "");
         newTodoRecord.setTitle(todoTitle);
         todos.add(newTodoRecord);
-        todosCounter += random.nextInt(10);
+        todosCounter += todosCounter % 2 == 0 || todosCounter < 10 ? random.nextInt(10) : -(random.nextInt(10));
         Map<String, String> entities = new HashMap<>();
         entities.put("status", "ok");
         return new ResponseEntity<>(entities, HttpStatus.OK);
