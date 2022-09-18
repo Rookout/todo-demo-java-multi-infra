@@ -111,9 +111,8 @@ jobs:
       - *setup_workspace
       - *load_version
       - *install_deps
-      - run: cat ~/.gitconfig
       - run: git config --global user.email "sonario@rookout.com"
-      - run: git config --global user.name "sonariobot"
+      - run: git config --global user.name "sonariorobot"
       - run: git config --list
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
       - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq -i -v '.javaMulti.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
