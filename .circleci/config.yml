@@ -112,15 +112,16 @@ jobs:
       - *load_version
       - *install_deps
       - run: git config --global user.email "sonario@rookout.com"
+      - run: git config --list
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
-      - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i -v '.javaMulti.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
+      - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq -i -v '.javaMulti.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
       - run: cd gitops-demo && git add argocd/apps/values.yaml
-      - run: cd gitops-demo && git commit -m "update todo-demo-java-multi-infra $NEW_VERSION"
+      - run: cd gitops-demo && git commit -m "update todo-demo-java-multi-infra $OLD_VERSION"
       - run: cd gitops-demo && git push --set-upstream origin staging
       - run: cd gitops-demo && git checkout production && git pull
-      - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i -v '.javaMulti.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
+      - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq -i -v '.javaMulti.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
       - run: cd gitops-demo && git add argocd/apps/values.yaml
-      - run: cd gitops-demo && git commit -m "update update todo-demo-java-multi-infra $NEW_VERSION"
+      - run: cd gitops-demo && git commit -m "update update todo-demo-java-multi-infra $OLD_VERSION"
       - run: cd gitops-demo && git push --set-upstream origin production
 
   deploy_demo:
@@ -171,8 +172,7 @@ workflows:
           <<: *filter_master
       - deploy_demo_argo:
           requires:
-            - build_and_push_demo_image
-          <<: *filter_master
+            - checkout_code_upver
       - deploy_demo:
           requires:
             - build_and_push_demo_image
