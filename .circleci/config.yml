@@ -131,7 +131,7 @@ jobs:
       - run: sleep 20 && echo "Checking Production..."
       - run: curl --fail 'http://tasks.rookout-demo.com/todos?from=statuscake'
       - run: sleep 20 && echo "Checking Staging..."
-      - run: curl --fail 'http://staging.tasks.rookout-demo.com/todos?from=statuscake'
+      - run: curl --fail 'https://tasks.staging.rookout-demo.com/todos?from=statuscake'
 
   notify_slack:
     docker:
